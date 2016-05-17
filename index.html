@@ -44,10 +44,10 @@
         </style>
         <script>
             angular.module("listaTelefonica", ["ngMessages"]);
-            angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope){
+            angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope, $filter){
                 $scope.app = "Lista Telefonica";
                 $scope.contatos = [
-                  {nome: "Pedro", telefone: "99998888", data: new Date(), operadora: {nome: "Oi", codigo: 14, categoria: "Celular"}},
+                  {nome: $filter('uppercase')("Pedro"), telefone: "99998888", data: new Date(), operadora: {nome: "Oi", codigo: 14, categoria: "Celular"}},
                   {nome: "Ana", telefone: "99998877", data: new Date(), operadora: {nome: "Vivo", codigo: 15, categoria: "Celular"}},
                   {nome: "Maria", telefone: "99998866", data: new Date(), operadora: {nome: "GVT", codigo: 25, categoria: "Fixo"}}
                 ];
@@ -98,7 +98,7 @@
                 <tr ng-class="{'selecionado negrito': contato.selecionado}" 
                     ng-repeat="contato in contatos | filter:{nome: criterioDeBusca} | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
                     <td><input type="checkbox" ng-model="contato.selecionado"/></td>
-                    <td>{{contato.nome | uppercase}}</td>
+                    <td>{{contato.nome}}</td>
                     <td>{{contato.telefone}}</td>
                     <td>{{contato.operadora.nome | lowercase}}</td>
                     <td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
