@@ -3,31 +3,37 @@ angular.module("listaTelefonica").config(function ($routeProvider) {
         templateUrl: "view/contatos.html"
         , controller: "listaTelefonicaCtrl"
         , resolve: {
-            contatos : function (contatosAPI) {
+            contatos: function (contatosAPI) {
                 return contatosAPI.getContatos();
-            } 
+            }
         }
     });
-    
+
     $routeProvider.when("/novoContato", {
         templateUrl: "view/novoContato.html"
         , controller: "novoContatoCtrl"
         , resolve: {
             operadoras: function (operadorasAPI) {
-              return operadorasAPI.getOperadoras();  
+                return operadorasAPI.getOperadoras();
             }
         }
     });
-    
-     $routeProvider.when("/detalhesContato/:id", {
+
+    $routeProvider.when("/detalhesContato/:id", {
         templateUrl: "view/detalhesContato.html"
         , controller: "detalhesContatoCtrl"
-        , resolve : {
+        , resolve: {
             contato: function (contatosAPI, $route) {
                 return contatosAPI.getContato($route.current.params.id);
             }
         }
     });
     
-    $routeProvider.otherwise({redirectTo: "/contatos"});
+    $routeProvider.when("/error", {
+        templateUrl: "view/error.html"
+    });
+
+    $routeProvider.otherwise({
+        redirectTo: "/contatos"
+    });
 });

@@ -31,11 +31,13 @@ app.get('/contatos', function(req, res) {
 });
 
 app.get('/contato/:id', function(req, res) {
-    var contato = contatos.filter(function(contato) {
-        return contato.id == req.params.id;
-    });
-                                   
-    res.json(contato);
+  contatos.forEach(function (contato) {
+  	if (contato.id == req.params.id) {
+  		res.json(contato);
+  		return;
+  	}
+  });
+  res.status(404).end();
 });
 
 app.post('/contatos', function(req, res) {
